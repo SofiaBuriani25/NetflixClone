@@ -1,0 +1,290 @@
+/* Reset base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Sfondo scuro su tutta la pagina */
+body {
+  background: #141414;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  color: #fff;
+}
+
+/* === NAVBAR === */
+.navbar {
+  background: #000;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: 56px;
+  position: sticky;
+  /* rimane in cima anche scrollando */
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid #222;
+}
+
+.navbar-brand {
+  color: #E50914;
+  /* rosso Netflix */
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-link {
+  color: #ccc;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+/* voce di menu della pagina attiva */
+.nav-link.active {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* coming soon attenuato */
+.nav-link.dimmed {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* === PAGINA === */
+.homepage {
+  padding: 32px 48px;
+}
+
+/* === SEZIONE (titolo + riga card) === */
+.section {
+  margin-bottom: 48px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+/* === RIGA CARD === */
+.row-wrapper {
+  position: relative;
+}
+
+.cards-row {
+  display: flex;
+  gap: 12px;
+  overflow: visible;
+  padding-bottom: 16px;
+}
+
+/* === FRECCE === */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid #444;
+  color: #fff;
+  width: 36px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 4px;
+  font-size: 24px;
+  transition: background 0.2s;
+}
+
+.arrow:hover {
+  background: rgba(50, 50, 50, 0.95);
+}
+
+.arrow-left {
+  left: -18px;
+}
+
+.arrow-right {
+  right: -18px;
+}
+
+/* === CARD === */
+.card {
+  /* ogni card occupa 1/7 della riga meno i gap */
+  flex: 0 0 calc((100% - 72px) / 7);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #1f1f1f;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* effetto ingrandimento hover */
+.card:hover {
+  transform: scale(1.08);
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 2/3;
+  /* proporzione locandina */
+  object-fit: cover;
+  display: block;
+}
+
+.card-info {
+  padding: 8px 10px 10px;
+}
+
+.card-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* aggiunge '...' se il titolo è troppo lungo */
+  margin-bottom: 4px;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #aaa;
+}
+
+/* === BADGE === */
+.badge-film {
+  display: inline-block;
+  font-size: 9px;
+  background: #534AB7;
+  color: #CECBF6;
+  border-radius: 2px;
+  padding: 1px 5px;
+}
+
+.badge-series {
+  display: inline-block;
+  font-size: 9px;
+  background: #0F6E56;
+  color: #9FE1CB;
+  border-radius: 2px;
+  padding: 1px 5px;
+}
+
+/* === STATI === */
+.loading {
+  color: #aaa;
+  padding: 48px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.error {
+  color: #E50914;
+  padding: 48px;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* === PAGINA DETTAGLIO === */
+.detail-page {
+  padding: 32px 48px;
+}
+
+.back-button {
+  background: transparent;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 32px;
+  transition: background 0.2s;
+}
+
+.back-button:hover {
+  background: #333;
+}
+
+.detail-container {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.detail-poster {
+  width: 280px;
+  flex-shrink: 0;
+  /* non si restringe mai */
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.detail-info {
+  flex: 1;
+  /* occupa tutto lo spazio rimanente */
+}
+
+.detail-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.detail-badges {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.detail-category {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.detail-description {
+  color: #ccc;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.detail-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.detail-meta span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

@@ -1,0 +1,64 @@
+services:
+
+  db:
+    image: mysql:8
+
+    container_name: netflix_db
+
+    restart: always
+
+    environment:
+      MYSQL_DATABASE: netflix_clone
+      MYSQL_USER: netflix_user
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+
+    ports:
+      - "3307:3306" # perchè la porta 3306 nel mio PC è già occupata da MySql o da WAMP. Laravel usa comunque la porta 3306.
+
+    volumes:
+      - mysql_data:/var/lib/mysql # Tutti i dati del database (in '/var/lib/mysql') vengono salvati nel disco persistente mysql_data
+
+  backend:
+    build: ./backend # qui viene usato il Dockerfile dentro backend
+
+    container_name: netflix_backend
+
+    restart: always
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./backend:/var/www/html # sincronizza il codice locale Laravel con il container 
+
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: netflix_clone
+      DB_USERNAME: netflix_user
+      DB_PASSWORD: root
+
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend # qui viene usato il Dockerfile dentro frontend
+
+    container_name: netflix_frontend
+
+    restart: always
+
+    ports:
+      - "5173:5173"
+
+    volumes:
+      - ./frontend:/app # il progetto React è dentro il container 
+      - /app/node_modules # node_modules sta dentro docker e non dentro il pc
+
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data: # Docker crea uno storage persistente chiamato mysql_data che poi viene usato nel db
